@@ -10,6 +10,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import Badge from '@material-ui/core/Badge'
 // Styles
 import { Wrapper, StyledButton } from './App.styles'
+
 // Types
 export type CartItemType = {
   id: number
@@ -36,7 +37,6 @@ function App() {
     'products',
     getProducts
   )
-  console.log(data)
 
   const getTotalItems = (items: CartItemType[]) =>
     items.reduce((ack: number, item) => ack + item.amount, 0)
@@ -80,11 +80,12 @@ function App() {
           cartItems={cartItems}
           addToCart={handleAddToCart}
           removeFromCart={handleRemoveFromCart}
+          setOpenCart={setCartOpen}
         />
       </Drawer>
 
       <StyledButton onClick={() => setCartOpen(true)}>
-        <Badge badgeContent={getTotalItems(cartItems)} color="error">
+        <Badge badgeContent={getTotalItems(cartItems)} color="error" max={99}>
           <AddShoppingCartIcon />
         </Badge>
       </StyledButton>
